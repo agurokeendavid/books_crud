@@ -17,8 +17,8 @@ $statement->execute();
 $books = $statement->fetchAll(PDO::FETCH_OBJ);
 
 ?>
-<?php require_once('header.php'); ?>
-<?php require_once('styles.php'); ?>
+<?php require_once('includes/header.php'); ?>
+<?php require_once('includes/styles.php'); ?>
 
 <div class="container">
     <div class="card mt-5">
@@ -76,7 +76,7 @@ $books = $statement->fetchAll(PDO::FETCH_OBJ);
         </div>
     </div>
 </div>
-<?php require_once('scripts.php'); ?>
+<?php require_once('includes/scripts.php'); ?>
 <script src="assets/js/custom.js"></script>
 
-<?php require_once('footer.php'); ?>
+<?php require_once('includes/footer.php'); ?>

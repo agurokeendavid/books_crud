@@ -22,8 +22,8 @@ if ($_POST) {
     }
 }
 ?>
-<?php require_once('header.php'); ?>
-<?php require_once('styles.php'); ?>
+<?php require_once('includes/header.php'); ?>
+<?php require_once('includes/styles.php'); ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-xl-6 col-sm-12">
@@ -61,5 +61,5 @@ if ($_POST) {
         </div>
     </div>
 </div>
-<?php require_once('scripts.php'); ?>
-<?php require_once('footer.php'); ?>
+<?php require_once('includes/scripts.php'); ?>
+<?php require_once('includes/footer.php'); ?>
