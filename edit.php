@@ -16,30 +16,36 @@ $statement = $connection->prepare($query);
 $statement->bindParam('id', $id, PDO::PARAM_INT);
 $statement->execute();
 $book = $statement->fetch(PDO::FETCH_OBJ);
-
+$connection = null;
 if (!$book) {
     header('location: books.php');
     return;
 }
 
 if ($_POST) {
-    $name = $_POST['name'];
-    $author = $_POST['author'];
-    $year_published = $_POST['year_published'];
-    $price = $_POST['price'];
+    require_once('database.php');
+    try {
+        $name = $_POST['name'];
+        $author = $_POST['author'];
+        $year_published = $_POST['year_published'];
+        $price = $_POST['price'];
 
-    $query = 'UPDATE books SET book_name = :book_name, book_author = :book_author, year_published = :year_published, price = :price WHERE id = :id';
-    $statement = $connection->prepare($query);
-    $statement->bindParam('book_name', $name, PDO::PARAM_STR);
-    $statement->bindParam('book_author', $author, PDO::PARAM_STR);
-    $statement->bindParam('year_published', $year_published, PDO::PARAM_INT);
-    $statement->bindParam('price', $price, PDO::PARAM_INT);
-    $statement->bindParam('id', $id, PDO::PARAM_INT);
-    if ($statement->execute()) {
-        header('location: books.php');
+        $query = 'UPDATE books SET book_name = :book_name, book_author = :book_author, year_published = :year_published, price = :price WHERE id = :id';
+        $statement = $connection->prepare($query);
+        $statement->bindParam('book_name', $name, PDO::PARAM_STR);
+        $statement->bindParam('book_author', $author, PDO::PARAM_STR);
+        $statement->bindParam('year_published', $year_published, PDO::PARAM_INT);
+        $statement->bindParam('price', $price, PDO::PARAM_INT);
+        $statement->bindParam('id', $id, PDO::PARAM_INT);
+        if ($statement->execute()) {
+            header('location: books.php');
+        }
+    } catch (Exception $exception) {
+        $message = $exception->getMessage();
+    } finally {
+        $connection = null;
     }
 }
-
 ?>
 
 <?php require_once('includes/header.php'); ?>

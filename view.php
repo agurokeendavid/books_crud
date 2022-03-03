@@ -15,6 +15,7 @@ $statement = $connection->prepare($query);
 $statement->bindParam('id', $id, PDO::PARAM_INT);
 $statement->execute();
 $book = $statement->fetch(PDO::FETCH_OBJ);
+$connection = null;
 
 if (!$book) {
     header('location: books.php');

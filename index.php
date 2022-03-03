@@ -26,10 +26,11 @@ if ($_POST) {
             header('location: books.php');
             return;
         }
-
         $message = 'Invalid email address/password.';
     } catch (Exception $exception) {
         $message = $exception->getMessage();
+    } finally {
+        $connection = null;
     }
 }
 

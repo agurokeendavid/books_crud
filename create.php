@@ -10,19 +10,25 @@ $pageTitle = 'Create a Book';
 
 if ($_POST) {
     require_once('database.php');
-    $name = $_POST['name'];
-    $author = $_POST['author'];
-    $year_published = $_POST['year_published'];
-    $price = $_POST['price'];
+    try {
+        $name = $_POST['name'];
+        $author = $_POST['author'];
+        $year_published = $_POST['year_published'];
+        $price = $_POST['price'];
 
-    $query = 'INSERT INTO books (book_name, book_author, year_published, price) VALUES (:book_name, :book_author, :year_published, :price)';
-    $statement = $connection->prepare($query);
-    $statement->bindParam('book_name', $name, PDO::PARAM_STR);
-    $statement->bindParam('book_author', $author, PDO::PARAM_STR);
-    $statement->bindParam('year_published', $year_published, PDO::PARAM_INT);
-    $statement->bindParam('price', $price, PDO::PARAM_INT);
-    if ($statement->execute()) {
-        $message = 'Book record has been successfully inserted.';
+        $query = 'INSERT INTO books (book_name, book_author, year_published, price) VALUES (:book_name, :book_author, :year_published, :price)';
+        $statement = $connection->prepare($query);
+        $statement->bindParam('book_name', $name, PDO::PARAM_STR);
+        $statement->bindParam('book_author', $author, PDO::PARAM_STR);
+        $statement->bindParam('year_published', $year_published, PDO::PARAM_INT);
+        $statement->bindParam('price', $price, PDO::PARAM_INT);
+        if ($statement->execute()) {
+            $message = 'Book record has been successfully inserted.';
+        }
+    } catch (Exception $exception) {
+        $message = $exception->getMessage();
+    } finally {
+        $connection = null;
     }
 }
 ?>

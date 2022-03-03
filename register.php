@@ -19,6 +19,8 @@ if ($_POST) {
         }
     } catch (Exception $exception) {
         $message = $exception->getMessage();
+    } finally {
+        $connection = null;
     }
 }
 ?>
