@@ -1,12 +1,6 @@
 <?php
 $pageTitle = 'Login';
-session_start();
-
-if (isset($_SESSION['isLoggedIn'])) {
-    header('location: books.php');
-    return;
-}
-
+require_once('check_authentication.php');
 if ($_POST) {
     require_once('database.php');
 
@@ -29,12 +23,8 @@ if ($_POST) {
         $message = 'Invalid email address/password.';
     } catch (Exception $exception) {
         $message = $exception->getMessage();
-    } finally {
-        $connection = null;
     }
 }
-
-
 ?>
 <?php require_once('includes/header.php'); ?>
 <?php require_once('includes/styles.php'); ?>

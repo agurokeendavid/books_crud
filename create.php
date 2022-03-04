@@ -1,13 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['isLoggedIn'])) {
-    header('location: index.php');
-    return;
-}
-
 $pageTitle = 'Create a Book';
-
+require_once('check_authentication.php');
 if ($_POST) {
     require_once('database.php');
     try {
@@ -27,8 +20,6 @@ if ($_POST) {
         }
     } catch (Exception $exception) {
         $message = $exception->getMessage();
-    } finally {
-        $connection = null;
     }
 }
 ?>

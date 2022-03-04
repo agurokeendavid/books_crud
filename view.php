@@ -1,12 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['isLoggedIn'])) {
-    header('location: index.php');
-    return;
-}
-
 $pageTitle = 'View Book';
+require_once('check_authentication.php');
 
 require_once('database.php');
 $id = $_GET['id'];
@@ -15,7 +9,6 @@ $statement = $connection->prepare($query);
 $statement->bindParam('id', $id, PDO::PARAM_INT);
 $statement->execute();
 $book = $statement->fetch(PDO::FETCH_OBJ);
-$connection = null;
 
 if (!$book) {
     header('location: books.php');

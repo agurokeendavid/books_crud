@@ -1,5 +1,6 @@
 <?php
 $pageTitle = 'Register';
+require_once('check_authentication.php');
 if ($_POST) {
     try {
         require_once('database.php');
@@ -19,8 +20,6 @@ if ($_POST) {
         }
     } catch (Exception $exception) {
         $message = $exception->getMessage();
-    } finally {
-        $connection = null;
     }
 }
 ?>
